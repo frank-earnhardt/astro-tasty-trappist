@@ -1,8 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import { getCollection, getEntry } from 'astro:content';
+const posts = await getCollection('blogs');
+console.log(posts)
 ---
-
+{
+    posts.map(post => {
+        return (
+            <a href={post.slug}>
+                <h2>{post.data.title}</h2>
+                <p>{post.data.description}</p>
+            </a>
+        )
+    })
+}
 <Layout title="Welcome to Astro.">
 	<main>
 		<svg
